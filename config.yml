@@ -1,0 +1,13 @@
+b8:
+    database:
+        servers:
+            read: DB_HOST
+            write: DB_HOST
+        name: DB_NAME
+        username: DB_USER
+        password: 'DB_PASSWORD'
+phpci:
+    url: 'URL'
+    worker:
+        host: localhost
+        queue: phpci
