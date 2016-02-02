@@ -4,15 +4,20 @@ mkdir /root/.ssh
 ln -s /deploy/config /root/.ssh/config
 chmod 600 /deploy/*
 
+eval "$(ssh-agent -s)"
+
 H=`cat /deploy/config | grep "Hostname\s" | awk -F' ' '{ print $2 }' `
 P=`cat /deploy/config | grep "Port\s" | awk -F' ' '{ print $2 }' `
+I=`cat /deploy/config | grep "IdentityFile\s" | awk -F' ' '{ print $2 }' `
 LEN=${#H[@]}
 (( LEN = LEN - 1 ))
 for A in `seq 0 $LEN`
 do
   PS=${P[$A]}
   HS=${H[$A]}
+  IS=${I[$A]}
 #check for existense
+  ssh-add $IS
   cat /root/.ssh/known_hosts | grep $HS | grep $PS
   if [ $? -ne 0 ]
   then
