@@ -11,7 +11,7 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     apt-get update && apt-get install -y oracle-java8-installer software-properties-common python-software-properties python-setuptools wget curl mysql-client maven jshon npm nodejs doxygen && \
     add-apt-repository ppa:ondrej/php && sed -i 's/jessie/wily/g' /etc/apt/sources.list.d/ondrej*.list && \
-    apt-get install -y --force-yes php7.0-fpm php7.0-mysql php7.0-curl php7.0-ldap php7.0-gd php7.0-imap php7.0-interbase php7.0-intl php7.0-mcrypt php7.0-xsl php7.0-json php7.0-sybase php7.0-bz2 nginx beanstalkd git && \
+    apt-get install -y --force-yes php7.0-mbstring php7.0-fpm php7.0-mysql php7.0-curl php7.0-ldap php7.0-gd php7.0-imap php7.0-interbase php7.0-intl php7.0-mcrypt php7.0-xsl php7.0-json php7.0-sybase php7.0-bz2 nginx beanstalkd git && \
     cd /usr/bin && curl -sS https://getcomposer.org/installer | php && \
     mv /usr/bin/composer.phar /usr/bin/composer && chmod +x /usr/bin/composer && mkdir -p /var/www/html && \
     composer global require anahkiasen/rocketeer && \
