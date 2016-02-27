@@ -22,7 +22,9 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     ln -s /root/.composer/vendor/bin/* /usr/bin && \
     mkdir -p /run/php && mkdir -p /var/lib/php/sessions && chmod 777 -R /var/lib/php/sessions && \
     cd /var/www/html && composer install && \
-    ln -s /usr/bin/nodejs /usr/bin/node && git config --global url."https://".insteadOf git:// && npm install -g bower gulp
+    ln -s /usr/bin/nodejs /usr/bin/node && git config --global url."https://".insteadOf git:// && npm install -g bower gulp && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 
 ADD nginx.conf /etc/nginx/sites-available/default
 
