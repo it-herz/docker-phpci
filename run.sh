@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export
+echo $TIMEZONE
+
 mkdir /root/.ssh
 ln -s /deploy/config /root/.ssh/config
 chmod 600 /deploy/*
@@ -31,33 +34,23 @@ then
   RC=1
   while [ $RC != 0 ]
   do
-    mysql -u $MYSQL_USER --password="$MYSQL_PASSWORD" -h $MYSQL_HOST -e 'CREATE DATABASE IF NOT EXISTS phpci;'
+    mysql -u $MYSQL_USER --password="$MYSQL_PASSWORD" -h $MYSQL_HOST -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DBNAME;"
     RC=$?
     sleep 3
   done
 
-#patch for PHPUnit Plugin
-  sed -i "s~getLastOutput~getLastError~g" /var/www/html/PHPCI/Plugin/PhpUnit.php
-  sed -i "s~--tap~--log-tap php://stderr~g" /var/www/html/PHPCI/Plugin/PhpUnit.php
-  sed -i "/public function getLastOutput/i \    public function getLastError() \{ return \$this->commandExecutor->getLastError();}" /var/www/html/PHPCI/Builder.php
-
-#patch for !quiet mode (executor)
-  sed -i "s/(\$this->quiet)/(!\$this->quiet)/g" /var/www/html/PHPCI/Helper/BaseCommandExecutor.php
-
 #Add repository for maven plugin
   cd /var/www/html
   cp composer.json 1.json
-  jshon -F 1.json -n [] -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/maven.git -i url -i 0 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/rocketeer.git -i url -i 1 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/symfony3-plugin.git -i url -i 2 -i repositories >composer.json
-
-#Apply russian localization
-  cd /
-  ./localize.sh
+  jshon -F 1.json -n {} -n false -i secure-http -i config -n [] -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/maven.git -i url -i 0 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/rocketeer.git -i url -i 1 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/symfony3-plugin.git -i url -i 2 -i repositories >composer.json
+  rm 1.json
 
   touch /initialized
 fi
 mkdir -p /root/.m2
 ln -s /settings.xml /root/.m2/settings.xml
-echo "$TIMEZONE" >/etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+dpkg-reconfigure -f noninteractive tzdata
 composer self-update
 dep self-update
 npm update -g
@@ -65,17 +58,17 @@ npm update -g
 echo '{ "allow_root": true }' >/root/.bowerrc
 
 cd /var/www/html
-./console phpci:update
+echo $GITHUB_TOKEN
 composer config -g github-oauth.github.com $GITHUB_TOKEN
+
 composer require itherz/phpci-rocketeer:dev-master
 composer require itherz/phpci-maven:dev-master
 composer require mindteam/phpci-symfony3-plugin:dev-master
 composer require thijskok/phpci-bower-plugin:dev-master
 composer require upassist/phpci-deployer
+composer install --prefer-source
 composer update
-
-rm /var/www/html/vendor/composer.lock
-composer update
+./console phpci:update
 
 chmod 777 /var/www/html/PHPCI/config.yml
 

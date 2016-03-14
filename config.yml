@@ -8,6 +8,23 @@ b8:
         password: 'DB_PASSWORD'
 phpci:
     url: 'URL'
+    security:
+      authentication:
+        internal: Internal
+        ldap: Ldap
+      ldap:
+        server: LDAP_HOST
+        base: LDAP_BASE
+        mailAttribute: LDAP_MAILATTRIBUTE
     worker:
         host: localhost
         queue: phpci
+    email_settings:
+        csrf: RANDOM_MD5
+        smtp_address: SMTP_HOST
+        smtp_port: 'SMTP_PORT'
+        smtp_username: SMTP_USER
+        smtp_password: SMTP_PASSWORD
+        from_address: SMTP_FROM
+        default_mailto_address: SMTP_DEFAULTTO
+        smtp_encryption: ''
