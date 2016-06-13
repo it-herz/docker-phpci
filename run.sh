@@ -56,7 +56,8 @@ dep self-update
 npm update -g
 
 echo '{ "allow_root": true }' >/root/.bowerrc
-
+echo "Host $GITHOST" > /root/.ssh/config
+echo "  Port $GITPORT" >> /root/.ssh/config
 cd /var/www/html
 echo $GITHUB_TOKEN
 composer config -g github-oauth.github.com $GITHUB_TOKEN
@@ -66,6 +67,10 @@ composer require itherz/phpci-maven:dev-master
 composer require mindteam/phpci-symfony3-plugin:dev-master
 composer require thijskok/phpci-bower-plugin:dev-master
 composer require upassist/phpci-deployer
+composer require robmorgan/phinx:dev-0.5.x-dev
+composer require deployphp/recipes
+composer require ket4yii/phpci-deployer-plugin:dev-identity_key_feature
+
 composer install --prefer-source
 composer update
 ./console phpci:update
