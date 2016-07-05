@@ -78,4 +78,4 @@ composer update
 
 chmod 777 /var/www/html/PHPCI/config.yml
 
-./daemonise phpci:daemonise
+supervisorctl start builder
