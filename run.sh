@@ -1,6 +1,8 @@
 #!/bin/bash
 
 mkdir /root/.ssh
+mkdir -p /deploy
+touch /deploy/config
 ln -s /deploy/config /root/.ssh/config
 chmod 600 /deploy/*
 
