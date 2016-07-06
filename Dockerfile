@@ -2,8 +2,6 @@ FROM ubuntu:latest
 
 MAINTAINER Dmitrii Zolotov <dzolotov@herzen.spb.ru>
 
-#  add-apt-repository ppa:ondrej/php && sed -i 's/jessie/wily/g' /etc/apt/sources.list.d/ondrej*.list && \
-
 RUN DEBIAN_FRONTEND=noninteractive
 
 RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get install -y locales && locale-gen && export LC_ALL=ru_RU.UTF-8 && \
@@ -53,6 +51,8 @@ ENV BEANSTALK_HOST beanstalk
 ENV BEANSTALK_QUEUE phpci
 
 WORKDIR /var/www/html/
+
+VOLUME /var/www/html/PHPCI/build/
 
 EXPOSE 80
 

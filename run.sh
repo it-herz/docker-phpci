@@ -1,8 +1,5 @@
 #!/bin/bash
 
-export
-echo $TIMEZONE
-
 mkdir /root/.ssh
 ln -s /deploy/config /root/.ssh/config
 chmod 600 /deploy/*
