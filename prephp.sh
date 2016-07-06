@@ -12,6 +12,9 @@ sed -i "s/LDAP_HOST/$LDAP_HOST/g" /var/www/html/PHPCI/config.yml
 sed -i "s/LDAP_BASE/$LDAP_BASE/g" /var/www/html/PHPCI/config.yml
 sed -i "s/LDAP_MAILATTRIBUTE/$LDAP_MAILATTRIBUTE/g" /var/www/html/PHPCI/config.yml
 
+sed -i "s/BEANSTALK_HOST/$BEANSTALK_HOST/g" /var/www/html/PHPCI/config.yml
+sed -i "s/BEANSTALK_QUEUE/$BEANSTALK_QUEUE/g" /var/www/html/PHPCI/config.yml
+
 RAND=`cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32`
 sed -i "s/RANDOM_MD5/$RAND/g" /var/www/html/PHPCI/config.yml
 sed -i "s/SMTP_HOST/$SMTP_HOST/g" /var/www/html/PHPCI/config.yml

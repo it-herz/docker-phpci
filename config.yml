@@ -17,8 +17,8 @@ phpci:
         base: LDAP_BASE
         mailAttribute: LDAP_MAILATTRIBUTE
     worker:
-        host: localhost
-        queue: phpci
+        host: BEANSTALK_HOST
+        queue: BEANSTALK_QUEUE
     email_settings:
         csrf: RANDOM_MD5
         smtp_address: SMTP_HOST

@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: mysqltest
       MYSQL_DATABASE: phpci
+  beanstalk:
+    image: schickling/beanstalkd
   phpci:
 #    image: itherz/phpci
     build: .
@@ -26,6 +28,8 @@ services:
       URL: 'http://127.0.0.1:5300/'
       GITHUB_TOKEN: '...'
       TIMEZONE: 'Europe/Moscow'
+      BEANSTALK_HOST: beanstalk
+      BEANSTALK_QUEUE: phpci
     depends_on:
       - mysqltest
     ports:

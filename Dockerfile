@@ -12,7 +12,7 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
     echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
     apt-get update && apt-get -o=APT::Force-LoopBreak=1 -u -y upgrade && apt-get install -o=APT::Force-LoopBreak=1 -y oracle-java8-installer software-properties-common python-software-properties python-setuptools wget curl mysql-client maven jshon npm nodejs doxygen && \
-    apt-get install -y --force-yes --allow-unauthenticated unzip php7.0-mbstring php7.0-fpm php7.0-zip php7.0-mysql php7.0-curl php7.0-ldap php7.0-gd php7.0-imap php7.0-interbase php7.0-intl php7.0-mcrypt php7.0-xsl php7.0-json php7.0-sybase php7.0-bz2 nginx beanstalkd git && \
+    apt-get install -y --force-yes --allow-unauthenticated unzip php7.0-mbstring php7.0-fpm php7.0-zip php7.0-mysql php7.0-curl php7.0-ldap php7.0-gd php7.0-imap php7.0-interbase php7.0-intl php7.0-mcrypt php7.0-xsl php7.0-json php7.0-sybase php7.0-bz2 nginx git && \
     cd /usr/bin && curl -sS https://getcomposer.org/installer | php && \
     mv /usr/bin/composer.phar /usr/bin/composer && chmod +x /usr/bin/composer && mkdir -p /var/www/html && \
     cd /usr/bin && wget http://deployer.org/deployer.phar && mv deployer.phar dep && chmod +x dep && \
@@ -49,9 +49,11 @@ ENV GITHUB_TOKEN ...
 ENV TIMEZONE GMT
 ENV GITHOST github.com
 ENV GITPORT 80
+ENV BEANSTALK_HOST beanstalk
+ENV BEANSTALK_QUEUE phpci
 
 WORKDIR /var/www/html/
 
-EXPOSE 80 11300
+EXPOSE 80
 
 CMD ["supervisord","-n","-c","/etc/supervisord.conf"]
