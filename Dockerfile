@@ -20,7 +20,6 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     cd /var/www/html && \
     ln -s /usr/bin/nodejs /usr/bin/node && git config --global url."https://".insteadOf git:// && npm install -g bower gulp && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    sed -i 's/error_reporting = .*/error_reporting = E_ALL \& ~E_NOTICE \& ~E_WARNING/' /etc/php/7.0/fpm/php.ini && \
     sed -i 's/error_reporting = .*/error_reporting = E_ALL \& ~E_NOTICE \& ~E_WARNING/' /etc/php/7.0/cli/php.ini
 
 ADD config.yml /var/www/html/PHPCI/config.yml
