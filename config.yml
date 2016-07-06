@@ -11,11 +11,6 @@ phpci:
     security:
       authentication:
         internal: Internal
-        ldap: Ldap
-      ldap:
-        server: LDAP_HOST
-        base: LDAP_BASE
-        mailAttribute: LDAP_MAILATTRIBUTE
     worker:
         host: BEANSTALK_HOST
         queue: BEANSTALK_QUEUE

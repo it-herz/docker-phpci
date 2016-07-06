@@ -1,6 +1,5 @@
 #!/bin/bash
 
-sed -i -e "s~;date.timezone\s*=.*~date.timezone=$TIMEZONE~g" /etc/php/7.0/fpm/php.ini
 sed -i -e "s~;date.timezone\s*=.*~date.timezone=$TIMEZONE~g" /etc/php/7.0/cli/php.ini
 
 sed -i "s/DB_HOST/$MYSQL_HOST/g" /var/www/html/PHPCI/config.yml
@@ -24,4 +23,3 @@ sed -i "s/SMTP_PASSWORD/$SMTP_PASSWORD/g" /var/www/html/PHPCI/config.yml
 sed -i "s/SMTP_FROM/$SMTP_FROM/g" /var/www/html/PHPCI/config.yml
 sed -i "s/SMTP_DEFAULTTO/$SMTP_DEFAULTTO/g" /var/www/html/PHPCI/config.yml
 
-supervisorctl start php
