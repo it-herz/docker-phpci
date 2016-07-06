@@ -60,7 +60,7 @@ echo "  Port $GITPORT" >> /root/.ssh/config
 cd /var/www/html
 echo $GITHUB_TOKEN
 composer config -g github-oauth.github.com $GITHUB_TOKEN
-
+composer require sebastian/phpcpd
 composer require itherz/phpci-rocketeer:dev-master
 composer require itherz/phpci-maven:dev-master
 composer require mindteam/phpci-symfony3-plugin:dev-master
