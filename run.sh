@@ -67,7 +67,7 @@ composer require itherz/phpci-maven:dev-master
 composer require mindteam/phpci-symfony3-plugin:dev-master
 composer require thijskok/phpci-bower-plugin:dev-master
 composer require upassist/phpci-deployer
-composer require robmorgan/phinx:dev-0.5.x-dev
+composer require robmorgan/phinx
 composer config repositories.deployphp git "https://github.com/ket4yii/recipes.git"
 composer require deployphp/recipes:dev-phinx-recipe
 composer require ket4yii/phpci-deployer-plugin:dev-identity_key_feature
