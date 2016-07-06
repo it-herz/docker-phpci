@@ -47,4 +47,6 @@ ENV BEANSTALK_QUEUE phpci
 
 WORKDIR /var/www/html/
 
+VOLUME /var/www/html/PHPCI/build/
+
 CMD ["supervisord","-n","-c","/etc/supervisord.conf"]
