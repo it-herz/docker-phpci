@@ -77,3 +77,4 @@ composer update
 
 chmod 777 /var/www/html/PHPCI/config.yml
 
+exit 0
