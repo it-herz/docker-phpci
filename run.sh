@@ -77,4 +77,3 @@ composer update
 
 chmod 777 /var/www/html/PHPCI/config.yml
 
-#supervisorctl start builder
