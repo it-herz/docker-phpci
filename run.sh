@@ -41,7 +41,7 @@ then
 #Add repository for maven plugin
   cd /var/www/html
   cp composer.json 1.json
-  jshon -F 1.json -n {} -n false -i secure-http -i config -n [] -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/maven.git -i url -i 0 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/rocketeer.git -i url -i 1 -n {} -s vcs -i type -s http://git.herzen.spb.ru/phpci/symfony3-plugin.git -i url -i 2 -i repositories >composer.json
+  jshon -F 1.json -n {} -n false -i secure-http -i config -n [] -n {} -s vcs -i type -s https://git.herzen.spb.ru/phpci/maven.git -i url -i 0 -n {} -s vcs -i type -s https://git.herzen.spb.ru/phpci/rocketeer.git -i url -i 1 -n {} -s vcs -i type -s https://git.herzen.spb.ru/phpci/symfony3-plugin.git -i url -i 2 -i repositories >composer.json
   rm 1.json
 
   touch /initialized
