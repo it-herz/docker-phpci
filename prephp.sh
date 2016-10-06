@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $SHELL_EXEC == "true"  ]]
+then
+    echo "<?php\n define('ENABLE_SHELL_PLUGIN', true);" > /var/www/html/PHPCI/local_vars.php
+fi
+
 sed -i -e "s~;date.timezone\s*=.*~date.timezone=$TIMEZONE~g" /etc/php/7.0/cli/php.ini
 
 sed -i "s/DB_HOST/$MYSQL_HOST/g" /var/www/html/PHPCI/config.yml
