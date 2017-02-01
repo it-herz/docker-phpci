@@ -14,7 +14,7 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     cd /usr/bin && curl -sS https://getcomposer.org/installer | php && \
     mv /usr/bin/composer.phar /usr/bin/composer && chmod +x /usr/bin/composer && mkdir -p /var/www/html && \
     cd /usr/bin && wget http://deployer.org/deployer.phar && mv deployer.phar dep && chmod +x dep && \
-    cd /var/www/html && rm -rf * && git clone https://github.com/it-herz/PHPCI . && git checkout pluggable-auth && \
+    cd /var/www/html && rm -rf * && git clone https://github.com/corpsee/php-censor . && \
     ln -s /root/.composer/vendor/bin/* /usr/bin && \
     mkdir -p /run/php && mkdir -p /var/lib/php/sessions && chmod 777 -R /var/lib/php/sessions && \
     cd /var/www/html && \
@@ -24,7 +24,7 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     sed -i 's/error_reporting = .*/error_reporting = E_ALL \& ~E_NOTICE \& ~E_WARNING/' /etc/php/7.0/cli/php.ini
 
 ADD nginx.conf /etc/nginx/sites-available/default
-ADD config.yml /var/www/html/PHPCI/config.yml
+ADD config.yml /var/www/html/php-censor/config.yml
 
 ADD prephp.sh /
 ADD run.sh /
@@ -38,7 +38,7 @@ ADD supervisord.conf /etc/supervisord.conf
 ENV MYSQL_HOST mysql
 ENV MYSQL_USER root
 ENV MYSQL_PASSWORD root
-ENV MYSQL_DBNAME phpci
+ENV MYSQL_DBNAME phpcensor
 ENV LDAP_HOST ldap
 ENV LDAP_MAILATTRIBUTE mail
 ENV LDAP_BASE dc=local
@@ -48,7 +48,7 @@ ENV TIMEZONE GMT
 ENV GITHOST github.com
 ENV GITPORT 80
 ENV BEANSTALK_HOST beanstalk
-ENV BEANSTALK_QUEUE phpci
+ENV BEANSTALK_QUEUE php-censor
 
 WORKDIR /var/www/html/
 
