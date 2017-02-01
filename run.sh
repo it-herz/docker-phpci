@@ -73,8 +73,8 @@ composer require ket4yii/phpci-deployer-plugin:dev-identity_key_feature
 
 composer install --prefer-source
 composer update
-./console phpci:update
+./console php-censor:update
 
-chmod 777 /var/www/html/PHPCI/config.yml
+chmod 777 /var/www/html/php-censor/config.yml
 
 exit 0
