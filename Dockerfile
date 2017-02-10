@@ -13,7 +13,6 @@ RUN echo "ru_RU.UTF-8 UTF-8" >>/etc/locale.gen && apt-get update && apt-get inst
     apt-get install -y --force-yes --allow-unauthenticated unzip php7.0-cli php7.0-mbstring php7.0-zip php7.0-mysql php7.0-curl php7.0-ldap php7.0-gd php7.0-imap php7.0-interbase php7.0-intl php7.0-mcrypt php7.0-xsl php7.0-json php7.0-sybase php7.0-bz2 php-mongodb git && \
     cd /usr/bin && curl -sS https://getcomposer.org/installer | php && \
     mv /usr/bin/composer.phar /usr/bin/composer && chmod +x /usr/bin/composer && mkdir -p /var/www/html && \
-    cd /usr/bin && wget http://deployer.org/deployer.phar && mv deployer.phar dep && chmod +x dep && \
     cd /var/www/html && rm -rf * && git clone https://github.com/it-herz/PHPCI . && git checkout pluggable-auth && \
     ln -s /root/.composer/vendor/bin/* /usr/bin && \
     mkdir -p /run/php && mkdir -p /var/lib/php/sessions && chmod 777 -R /var/lib/php/sessions && \
@@ -44,6 +43,7 @@ ENV GITHOST github.com
 ENV GITPORT 80
 ENV BEANSTALK_HOST beanstalk
 ENV BEANSTALK_QUEUE phpci
+ENV PATH $PATH:/var/www/html/vendor/bin
 
 WORKDIR /var/www/html/
 
